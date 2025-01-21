@@ -57,30 +57,123 @@ For this lab, you will \\
   \item Recreate this document (except put your name/info at the top) to get used to writing in \LaTeX~  and to see the types of things we can do when creating a document to convey statistical information. Make sure to commit and push your work using GitHub desktop as you finish each section.
 \end{enumerate}
 
-\noindent \textbf{Remarks:} You will find the class Sweave cheatsheet to be \emph{incredibly} (\emph{incredibly}) helpful.
+\noindent \textbf{Remarks:} You will find the class Sweave cheatsheet to be \emph{incredibly} \verb|\emph{incredibly}| helpful.
 
-\section{Methods}
-Describe the data you are working with, if applicable. Describe the specific process you will follow to answer the question at hand. This does not mean you should write something like this.
-\begin{quote}
-\textit{I did this and then I did that and then I did this other thing and then..., and then..., and then...}
-\end{quote}
-Instead, it should provide a clear and concise narrative that flows from the problem specification in the Introduction to how you will approach answering it. This is where I would expect to see some citations for \texttt{R} packages you will use to conduct the statistical analysis reported in the Results section.
+\section{Word Processing Tasks}
+\subsection{Centering Text}
+\begin{center}
+We can center text in Sweave.
+\end{center}
+\subsection{Bold, Italics, and Underlining}
+\noindent We can \textbf{bold}, \textit{italicize}, \underline{underline}, and \emph{emphasize} text in Sweave. \\
+\indent Note, I did a column break here so that the list wasn’t broken across columns.
+
+\columnbreak
+
+\subsection{Lists, and Numbered Lists}
+We can write an unordered list in Sweave.
+\begin{itemize}
+  \item first item
+  \item second item
+  \item third item
+\end{itemize}
+
+\noindent We can write an numbered list in Sweave.
+\begin{enumerate}
+  \item first item
+  \item second item
+  \item third item
+\end{enumerate}
+
+\noindent We can write an lettered list in Sweave.
+\begin{enumerate}[a.]
+  \item first item
+  \item second item
+  \item third item
+\end{enumerate}
 
 
-\subsection{Methods Subsection}
-Much like the Introduction, subsections can be helpful for the Methods section. For example, you might describe data collection and the statistical analyses of the collected data in different subsections. Or, you may have different questions that require distinct methods. 
 
-\section{Results}
-Tie together the Introduction -- where you introduce the problem at hand -- and the methods --  what you propose to do to answer the question. Present your data, the results of your analyses, and how each reported aspect contributes to answering the question. This section should include table(s), statistic(s), and graphical displays. Make sure to put the results in a sensible order and that each result contributes a logical and developed solution. It should not just be a list. Avoid being repetitive. 
+\subsection{Submissions}
+This part of the midterm is due Sunday November 14 by 5p. I will not accept late submissions. Note that you may use this template to help build your introduction and methods sections, and you can use the work you did as a group during the datathon. Still, I expect this submission to be your own summary and extension of that work without collaboration.
 
-\subsection{Results Subsection}
-Subsections can be helpful for the Results section, too. This can be particularly helpful if you have different questions to answer. 
+\subsection{Typing Mathematical Equations}
+We can write a one line equation that is centered like this
+\begin{center}
+  \[\widehat{y_i} = \beta_0 + \beta_1 x_{1i}+ \beta_2 x_{2i} + \epsilon_i.\]
+\end{center}
+This can be written in the text, as $\widehat{y_i} = \beta_0 + \beta_1 x_{1i}+ \beta_2 x_{2i} + \epsilon_i$ using as well.
+  
+When we need to show multiple steps, we can create a multi-line equation that is centered like this: 
+\begin{align*}
+8(x-5)+x&=9(x-5)+5 \\
+8x-40+x&=9x-45+5 \tag{Distributing}\\
+9x-40&=9x-40 \tag{Combining like terms}\\
+9x&=9x \tag{Adding 40 to both sides}\\
+9x&=9x \tag{Dividing both sides by 9}
+\end{align*}
+The equality holds for any x.
 
+Note, I did a page break here so that the next section
+started on a clean page.
+\pagebreak
 
-\section{Discussion}
- You should objectively evaluate the evidence you found in the data. Do not embellish or wish-terpet (my made-up phase for making an interpretation you, or the researcher, wants to be true without the data \emph{actually} supporting it). Connect your findings to the existing information you provided in the Introduction.
+\subsection{Running R Code}
+Code chunks can be entered into Sweave; e.g., here are some comments.
 
-Finally, provide some concluding remarks that tie together the entire paper. Think of the last part of the results as abstract-like. Tell the reader what they just consumed -- what's the takeaway message?
+<<size='scriptsize'>>=
+# R code goes here
+# Output is automatically printed in the pdf
+@
+Below, you can see that we can do algebra with R.
+
+<<size='scriptsize'>>=
+8*(9-5) + 9 # 8(x-5) + x for x=9
+@
+
+Below, we show we can produce the code without evaluating it.
+<<eval=FALSE,size='scriptsize'>>=
+8*(9-5) + 9 # 8(x-5) + x for x=9 
+@
+
+Alternatively, we can produce the output without the code.
+<<echo=FALSE,size='scriptsize'>>=
+8*(9-5) + 9 # 8(x-5) + x for x=9
+@
+
+We can also call objects from R directly
+<<size='scriptsize'>>=
+result<- 8*(9-5)+9 #8(x-5)+xforx=9 
+result.with.error <- result + rnorm(1, mean = 0, sd = 0.1) 
+result.with.error
+@
+The result is \Sexpr{result.with.error}. Note that I did not type the result, but I used the \verb|\Sexpr{}| command.
+
+\subsection{Plotting}
+We can also plot with R.
+<<<plot1, eval=FALSE, size='scriptsize'>>=
+#Plot a histogram of random exponential data
+hist(rexp(100))
+@
+
+\begin{figure}[H]
+  \begin{center}
+<<echo=FALSE, warning=FALSE, message=FALSE, fig.dim=c(5,3.5)>>=
+hist(rexp(100))
+@
+\caption{A histogram of random exponentially distributed data, $n=100$.}
+\label{plot1} %we can now reference plot1
+  \end{center}
+\end{figure}
+
+\columnbreak
+
+\subsection{Tables}
+
+\textbf{References}
+
+\pagebreak
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
@@ -98,7 +191,6 @@ you cite them in your document, the bibliography section will automatically popu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Appendix
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
 \onecolumn
 \section{Appendix}
 
