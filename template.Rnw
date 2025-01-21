@@ -116,7 +116,7 @@ The equality holds for any x.
 
 Note, I did a page break here so that the next section
 started on a clean page.
-\pagebreak
+\newpage
 
 \subsection{Running R Code}
 Code chunks can be entered into Sweave; e.g., here are some comments.
@@ -169,19 +169,28 @@ hist(rexp(100))
 \columnbreak
 
 \subsection{Tables}
+Below, we load and take a peek at some data about the death rates per 1000 in Virginia in 1940 \citep{Molyneaux}
 
-\textbf{References}
+<<size='scriptsize'>>=
+data(VADeaths)
+head(VADeaths) # Take a peek of the data
+@
 
-\pagebreak
+If we want to print this nicely, we can do so using the xtable package \citep{xtable}, which we can reference using the label (Table \ref{VADeaths.tab}).
+
+<<size='scriptsize'>>=
+library(xtable)
+sleep.table<-xtable(VADeaths, 
+                    label = "VADeaths.tab", 
+                    caption = "Death Rates per 1000 in Virginia (1940).") 
+@
+
+<<results="asis",echo=FALSE>>=
+print(sleep.table,
+table.placement = "H", include.rownames=FALSE, size = "small")
+@
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Bibliography
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{2em}
-
-\noindent\textbf{Bibliography:} Note that when you add citations to your bib.bib file \emph{and}
-you cite them in your document, the bibliography section will automatically populate here.
 
 \begin{tiny}
 \bibliography{bib}
